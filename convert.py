@@ -22,22 +22,24 @@ def convert():
     options, args = parser.parse_args()
     if (not len(args)):
         raise Exception("Missing input file.")
-    arg0 = os.path.abspath(args[0])
-    inputvideo = arg0
-    if (not os.path.isfile(inputvideo)):
-        raise Exception("Can not open " + inputvideo)
+    for arg in args:
+        inputvideo = os.path.abspath(arg)
+        if (not os.path.isfile(inputvideo)):
+            print("Can not open " + inputvideo)
+            continue
 
-    FFMPEG_PARA = \
-        ' -y -hide_banner -loglevel error -stats ' + \
-        ' -c:v mpeg4 -preset slow -b:v 24000k -r 30 -s 1280x720 -acodec aac -strict -2 -ac 2 -ab 256k -ar 44100 -f mp4 '
+        FFMPEG_PARA = \
+            ' -y -hide_banner -loglevel error -stats ' + \
+            ' -c:v mpeg4 -preset slow -b:v 24000k -r 30 -s 1280x720 -acodec aac -strict -2 -ac 2 -ab 256k -ar 44100 -f mp4 '
 
-    outputfile = inputvideo + ".cvt.mp4"
+        outputfile = inputvideo + ".cvt.mp4"
 
-    print("Convert to " + outputfile)
-    cmd = "ffmpeg" + ' -i "' + inputvideo + '"' + FFMPEG_PARA + \
-        '"' + outputfile + '"'
-    print("Invoking " + cmd)
-    subprocess.call(cmd, shell=True, env=env)
+        print("Convert " + inputvideo + " to " + outputfile)
+        cmd = "ffmpeg" + ' -i "' + inputvideo + '"' + FFMPEG_PARA + \
+            '"' + outputfile + '"'
+        print("Invoking " + cmd)
+        subprocess.call(cmd, shell=True, env=env)
+        print(outputfile + " finished")
 
 
 if __name__ == '__main__':
