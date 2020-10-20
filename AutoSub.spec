@@ -1,4 +1,4 @@
-# -*- mode: python -*-
+# -*- mode: python ; coding: utf-8 -*-
 
 block_cipher = None
 
@@ -9,9 +9,10 @@ def get_opencv_path():
 
 a = Analysis(['AutoSub.py'],
              pathex=['.'],
-             binaries=[],
+             binaries=[
+                (get_opencv_path() + '/opencv*_ffmpeg*.dll','.')
+			 ],
              datas=[
-                (get_opencv_path() + '/opencv_ffmpeg340.dll','.'),
                 ('./usr/nmtg.png', './usr'),
                 ('./usr/nmtgex.png', './usr'),
                 ('./usr/jpfont.ttf', './usr'),
@@ -27,7 +28,8 @@ a = Analysis(['AutoSub.py'],
              excludes=[],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
-             cipher=block_cipher)
+             cipher=block_cipher,
+             noarchive=False)
              
 dict_tree = Tree(get_opencv_path(), prefix='cv2', excludes=["*.pyc"])
 a.datas += dict_tree
@@ -40,9 +42,12 @@ exe = EXE(pyz,
           a.binaries,
           a.zipfiles,
           a.datas,
-          name='Kirafan_AutoSub',
+          [],
+          name='Kirafan_AutoSub_v11.0.',
           debug=False,
+          bootloader_ignore_signals=False,
           strip=False,
           upx=True,
+          upx_exclude=[],
           runtime_tmpdir=None,
           console=True )

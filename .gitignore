@@ -5,7 +5,15 @@
 *.m4v
 *.mp4
 *.aac
+*.mov
+*.bkp
+*.config
+*_seq_video/
 __pycache__/
 build/
 dist/
 .vs/
+.idea/
+.vscode/
+venv/
+ffmpeg.exe
