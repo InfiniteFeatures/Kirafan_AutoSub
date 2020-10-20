@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import traceback
 
 import sequence_crop
 import analyse_video
@@ -30,12 +31,12 @@ Please select function from below:
 ''')
 
 try:
-    try:
-        user_select = int(input("Input from (1, 2, 3, 4, 5) >> "))
-    except:
-        raise Exception("Unavailable Selection")
-    if (not user_select in {1, 2, 3, 4, 5}):
-        raise Exception("Unavailable Selection " + str(user_select))
+    user_select = 0
+    while (not user_select in {1, 2, 3, 4, 5}):
+        try:
+            user_select = int(input("Input from (1, 2, 3, 4, 5) >> "))
+        except ValueError:
+            pass
 
     if user_select == 1:
         sequence_crop.sequence_crop()
@@ -49,8 +50,11 @@ try:
         convert.convert()
     else:
         raise Exception("Unknown Selection")
+    print("Done")
+    input("Press enter to exit...")
 
 except Exception as e:
+    traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr)
     print("ERROR: " + str(e))
-    print("Exiting")
-    input()
+    print("Aborting")
+    input("Press enter to exit...")

@@ -40,12 +40,12 @@ def sequence_crop():
     options, args = parser.parse_args()
     if (not len(args)):
         print("Missing input video.")
-        input()
+        input("Press enter to exit...")
         exit(-1)
     inputvideo = os.path.abspath(args[0])
     if (not os.path.isfile(inputvideo)):
         print("Can not open video file " + inputvideo)
-        input()
+        input("Press enter to exit...")
         exit(-1)
 
     # output dir
