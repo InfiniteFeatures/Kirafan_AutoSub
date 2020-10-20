@@ -431,7 +431,7 @@ def patch_subtitle():
         print("  Invoking " + ffcmd)
         subprocess.call(ffcmd, shell=True, env=env)
         ffcmd = 'ffmpeg -y -hide_banner -loglevel error -vn -i "' + out_name + '"' + \
-            " -i " + 'autosubed_tmp.aac' + \
+            " -i " + 'autosubed_tmp.aac' + " -bsf:a aac_adtstoasc" \
             " -codec copy " + '"' + inputvideo + ".autosubed.mp4" + '"'
         print("  Invoking " + ffcmd)
         subprocess.call(ffcmd, shell=True, env=env)
