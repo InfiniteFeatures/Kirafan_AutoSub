@@ -442,7 +442,7 @@ def analyse_video():
         json_trans = [''] * len(nmtg_map)
         json_data = {
             "video": basename,
-            "version": '10.0.0',
+            "version": '11.0.0',
             "total": len(nmtg_map),
             "lang": currentlang,
             "title": "",
