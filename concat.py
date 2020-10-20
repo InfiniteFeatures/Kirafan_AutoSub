@@ -5,7 +5,7 @@ import sys
 import optparse
 
 
-def concat(args):
+def concat():
     try:
         sys.setdefaultencoding('utf-8')
     except:
@@ -18,7 +18,7 @@ def concat(args):
     spliter = ';' if os.name == 'nt' else ':'
     env["PATH"] = python_dir + spliter + highPath + spliter + env["PATH"]
 
-    parser = optparse.OptionParser(args)
+    parser = optparse.OptionParser()
     options, args = parser.parse_args()
 
     if (not len(args)):
@@ -38,4 +38,4 @@ def concat(args):
 
 
 if __name__ == '__main__':
-    concat(' '.join(sys.argv[1:]))
+    concat()

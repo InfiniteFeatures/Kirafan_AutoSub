@@ -7,7 +7,7 @@ import sys
 import optparse
 
 
-def sequence_crop(args):
+def sequence_crop():
     try:
         sys.setdefaultencoding('utf-8')
     except:
@@ -20,7 +20,7 @@ def sequence_crop(args):
     spliter = ';' if os.name == 'nt' else ':'
     env["PATH"] = python_dir + spliter + highPath + spliter + env["PATH"]
 
-    parser = optparse.OptionParser(args)
+    parser = optparse.OptionParser()
     parser.add_option('--start_num',
                       action="store", dest="start_num",
                       help="start num of sub index", default=1)
@@ -179,4 +179,4 @@ def sequence_crop(args):
 
 
 if __name__ == '__main__':
-    sequence_crop(' '.join(sys.argv[1:]))
+    sequence_crop()

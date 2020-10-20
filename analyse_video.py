@@ -9,7 +9,7 @@ import re
 import optparse
 
 
-def analyse_video(args):
+def analyse_video():
     try:
         sys.setdefaultencoding('utf-8')
     except:
@@ -456,4 +456,4 @@ def analyse_video(args):
 
 
 if __name__ == '__main__':
-    analyse_video(' '.join(sys.argv[1:]))
+    analyse_video()

@@ -38,15 +38,15 @@ try:
         raise Exception("Unavailable Selection " + str(user_select))
 
     if user_select == 1:
-        sequence_crop.sequence_crop(args)
+        sequence_crop.sequence_crop()
     elif user_select == 2:
-        analyse_video.analyse_video(args)
+        analyse_video.analyse_video()
     elif user_select == 3:
-        patch_subtitle.patch_subtitle(args)
+        patch_subtitle.patch_subtitle()
     elif user_select == 4:
-        concat.concat(args)
+        concat.concat()
     elif user_select == 5:
-        convert.convert(args)
+        convert.convert()
     else:
         raise Exception("Unknown Selection")
 

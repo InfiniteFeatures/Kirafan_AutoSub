@@ -5,7 +5,7 @@ import sys
 import optparse
 
 
-def convert(args):
+def convert():
     try:
         sys.setdefaultencoding('utf-8')
     except:
@@ -18,7 +18,7 @@ def convert(args):
     spliter = ';' if os.name == 'nt' else ':'
     env["PATH"] = python_dir + spliter + highPath + spliter + env["PATH"]
 
-    parser = optparse.OptionParser(args)
+    parser = optparse.OptionParser()
     options, args = parser.parse_args()
     if (not len(args)):
         raise Exception("Missing input file.")
@@ -41,4 +41,4 @@ def convert(args):
 
 
 if __name__ == '__main__':
-    convert(' '.join(sys.argv[1:]))
+    convert()

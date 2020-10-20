@@ -11,7 +11,7 @@ import optparse
 import re
 
 
-def patch_subtitle(args):
+def patch_subtitle():
     try:
         sys.setdefaultencoding('utf-8')
     except:
@@ -44,7 +44,7 @@ def patch_subtitle(args):
     if (not os.path.isfile(nmtg_blank_ex_f)):
         nmtg_blank_ex_f = highPath + "/usr/nmtgex.png"
 
-    parser = optparse.OptionParser(args)
+    parser = optparse.OptionParser()
     parser.add_option('--gray_threshold',
                       action="store", dest="gray_threshold",
                       help="gray_threshold of binarization", default=160)
@@ -448,4 +448,4 @@ def patch_subtitle(args):
 
 
 if __name__ == '__main__':
-    patch_subtitle(' '.join(sys.argv[1:]))
+    patch_subtitle()
