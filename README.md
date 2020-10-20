@@ -58,7 +58,7 @@ Check the [releases](https://github.com/InfiniteFeatures/Kirafan_AutoSub/release
    - This procedure will analyse and label texts in videos, and generate a `krfss` file and a image folder for each video in `autosub` folder.
 1. Translate  
    Edit those `krfss` files by **Krfss_Editor** 
-     - Refer the tutorial of [Krfss_Editor](https://github.com/kirafanautodec/Krfss_Editor).
+     - Refer the tutorial of [Krfss_Editor](https://github.com/InfiniteFeatures/Krfss_Editor).
 1. Patch  
    Drag the **folder** containing `0001.mp4` ... into `Kirafan_AutoSub.exe`, and select 3 (Patch). 
    - This procedure will apply the subtile file `krfss` and automatically patch them into videos. 
