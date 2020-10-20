@@ -86,7 +86,7 @@ def sequence_crop():
     print("Invoking: " + ffcmd)
     subprocess.call(ffcmd, shell=True, env=env)
     print("Re-encoding Finished")
-
+    
     os.makedirs(output_dir, exist_ok=True)
 
     video_start_num = int(options.start_num)
@@ -176,7 +176,10 @@ def sequence_crop():
     print("%06.2f" % time, "FINISHED.")
     video.release()
 
-    if (len(clip_list) == 0):
+    if status == 2:
+        ut = ut if ut != 0 else (frame - 1) / fps
+        clip_list.append((video_index, ss, ut-ss))
+    elif (len(clip_list) == 0):
         ss = 0
         t = (frame - 1) / fps
         clip_list = [[0, ss, t]]
