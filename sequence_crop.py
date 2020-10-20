@@ -54,11 +54,34 @@ def sequence_crop():
     dirname = os.path.dirname(inputvideo)
     output_dir = dirname + ('/' if dirname else '') + basename + '_seq_video/'
 
+    # check for rotated video and extra wide
+    video = cv2.VideoCapture(inputvideo)
+    h = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    w = video.get(cv2.CAP_PROP_FRAME_WIDTH)
+    video.release()
+
+    filters = []
+    md = ''
+    if (h > w):
+        print(f"Height {h} greater than width {w}, rotating")
+        filters.append('transpose=2')
+        md = ' -metadata:s:v rotate=0'
+        h, w = w, h
+        print(f"New height: {h}, width: {w}")
+
+    ratio = w/h
+    nratio = 1920/1080
+    RATIO_THR = 0.01
+    if ((ratio - nratio) > RATIO_THR):
+        filters.append(f'crop=out_w=1920/1080*in_h')
+
+    filters = f'-vf "{",".join(filters)}"' if len(filters) > 0 else ''
+
     # re encode
     reencode_video_name = inputvideo + '_tmp_thumbnail.mp4'
     print("Re encode to CFR Video file: " + inputvideo)
     ffcmd = 'ffmpeg -hide_banner -loglevel error -stats -y -i "' + inputvideo + '"' + \
-        ' -c:v h264 -preset fast -r 30 -s 256*144 -an -f mp4 "' + \
+        ' -c:v h264 ' + filters + ' -preset fast -r 30 -s 256*144 -an -f mp4 "' + \
             reencode_video_name + '"'
     print("Invoking: " + ffcmd)
     subprocess.call(ffcmd, shell=True, env=env)
@@ -87,7 +110,8 @@ def sequence_crop():
     TIME_REPORT_INT = int(options.report)
     FFMPEG_PARA = \
         ' -y -hide_banner -loglevel error -stats ' + \
-        ' -c:v mpeg4 -preset slow -b:v 24000k -r 30 -s 1280x720 -acodec aac -strict -2 -ac 2 -ab 256k -ar 44100 -f mp4 '
+        ' -c:v mpeg4 -preset slow -b:v 24000k ' + filters + md + ' -r 30 -s 1280x720' + \
+        ' -acodec aac -strict -2 -ac 2 -ab 256k -ar 44100 -f mp4 '
 
     video = cv2.VideoCapture(reencode_video_name)
     fps = video.get(cv2.CAP_PROP_FPS)
