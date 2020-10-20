@@ -431,6 +431,7 @@ def analyse_video():
 
         #print("All End", frame)
         video.release()
+        cv2.destroyAllWindows()
         print("\n")
         timestamp_data.append({"at": frame, "action": "O"})
 
