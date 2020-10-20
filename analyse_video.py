@@ -349,7 +349,7 @@ def analyse_video():
                 # Start of a Line
                 if (textpos > 0):
                     #print("LN", frame)
-                    timestamp_data.append({"at": frame, "action": "L"})
+                    #timestamp_data.append({"at": frame, "action": "L"}) <= unused
                     # Status -> 1
                     status = 1
                     # mark frame change
@@ -378,7 +378,7 @@ def analyse_video():
                         frame_real = frame - int(options.wait_frame_threshold)
                         #print("End", frame_real)
                         timestamp_data.append(
-                            {"at": frame_real, "action": "E", "sub": index_sub})
+                            {"at": frame_real, "action": "E"}) #, "sub": index_sub}) <= unused
                         storing = 0
                         # Store TextArea
                         img_line0_color_c = img_line0_color.copy()
